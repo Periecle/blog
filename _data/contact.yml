@@ -14,8 +14,7 @@
   type: rss
   icon: 'fas fa-rss'
   noblank: true
-
- -
-   type: linkedin
-   icon: 'fab fa-linkedin'
-   url:  'https://www.linkedin.com/in/reodont/'
+-
+  type: linkedin
+  icon: 'fab fa-linkedin'
+  url:  'https://www.linkedin.com/in/reodont/'
