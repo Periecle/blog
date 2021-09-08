@@ -79,7 +79,7 @@ theme_mode:   # [light|dark]
 img_cdn: 'https://cdn.jsdelivr.net/gh/Periecle/blog-images@master'
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://cdn.jsdelivr.net/gh/Periecle/blog-images@master/common/avatar.jpg
+avatar: https://cdn.jsdelivr.net/gh/Periecle/blog-images@master/common/avatar.png
 
 # boolean type, the global switch for ToC in posts.
 toc: true
