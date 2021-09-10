@@ -32,4 +32,4 @@ jobs:
         run: "ssh-keyscan -H -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }}  >> ~/.ssh/known_hosts"
       - 
         name: "Deploy with rsync"
-        run: "rsync -avzc -e \"ssh -p ${{ secrets.SSH_PORT }}\" ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kvasnytskyi.net/"
+        run: "rsync -avz --checksum -e \"ssh -p ${{ secrets.SSH_PORT }}\" ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kvasnytskyi.net/"
