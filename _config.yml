@@ -84,9 +84,12 @@ avatar: https://cdn.jsdelivr.net/gh/Periecle/blog-images@master/common/avatar.pn
 # boolean type, the global switch for ToC in posts.
 toc: true
 
-disqus:
-  comments: false  # boolean type, the global switch for posts comments.
-  shortname: ''    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+comments:
+  active: utterances         # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  # The active options are as follows:
+  utterances:
+    repo: Periecle/blog
+    issue_term: title
 
 paginate: 10
 
@@ -133,7 +136,6 @@ defaults:
     values:
       layout: page
       permalink: /:title/
-      dynamic_title: true    # Hide title in mobile screens.
 
 sass:
   style: compressed
