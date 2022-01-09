@@ -8,12 +8,12 @@ img_path: /posts/08-01-2022-Resolving-Performance-Issues-In-Practice/
 mermaid: true
 ---
 
-This article is a recap of my presentation at Devoxx Ukraine 2021 about resolving performance issues.
+This article is a recap of [my presentation at Devoxx Ukraine 2021](https://www.youtube.com/watch?v=pPu1w4Zlhoc) about resolving performance issues.
 
 # Agenda
 
 We have a lot to discuss.
-1. Most important - motivation - why should we even spend time on this talk? What problem do we solve? Why do we care about this?
+1. Most important — motivation — why should we even spend time on this talk? What problem do we solve? Why do we care about this?
 2. We also should get onto the common ground in terms of terminology. I will specify what I call systems performance study and will ruin some common myths.
 3. It is essential to mention what methodologies(or patterns) people usually use when they encounter performance issues in production and why they are ineffective and often lead to erroneous results. If we want to know how to do something right, it is good to know what not to do.
 4. After that, we will discuss a methodology that I recommend following to locate and fix performance issues with a real-life example.
@@ -22,9 +22,9 @@ We have a lot to discuss.
 
 ![Motivation](motivation.png){: width="1000" height="400" }
 
-I have worked with multiple teams, domains, and companies, and most of the time, I have seen people making the same mistakes when encountering performance issues. When trying to achieve goal X, they chaotically move from one hypothesis to another, blaming 3rd party, blaming another team, etc. And after a lot of struggling with googling, asking questions on stack overflow, and random tuning of JVM parameters(or any other hyperparameters of the system), they create some new problems, believe that they resolved the issue, or try to convince their manager that problem is fundamental and unsolvable. That is ineffective and not the path of an engineer.
+I have worked with multiple teams, domains, and companies, and most of the time, I have seen people making the same mistakes when encountering performance issues. When trying to achieve goal X, they chaotically move from one hypothesis to another, blaming 3rd party, blaming another team, etc. And after a lot of struggling with googling, asking questions on stack overflow, and random tuning of JVM parameters(or any other hyperparameters of the system), they create some new problems, believe that they resolved the issue, or try to convince their manager that problem is fundamental and unsolvable. That is ineffective and **not the path of an engineer**.
 
-When developing a system, we think of functional and non-functional requirements, create architecture, and plan our work. We are working by methodology - an ordered list of steps that we should do to complete the task?
+When developing a system, we think of functional and non-functional requirements, create architecture, and plan our work. We are working by *methodology* — an ordered list of steps that we should do to complete the task.
 
 I ask myself why resolving performance issues should differ fundamentally? We definitely should cultivate methodology, guidelines, and engineering culture of resolving performance issues to fix stuff effectively, consistently, and estimate our work, like any other activity of a software engineer.
 
@@ -34,59 +34,75 @@ I ask myself why resolving performance issues should differ fundamentally? We de
 
 ![Performance](performance.png)
 
-So, system performance measures how well the system performs under applied load. Performance can be measured by observing the states of system components, both software, and hardware.
-Performance engineering is a set of techniques used to ensure the required level of system performance described as a non-functional requirement for system architecture.
+So, system performance measures how well the system performs under applied load. *Performance* can be measured by observing the states of system components, both software, and hardware.
+
+*Performance engineering* is a set of techniques used to ensure the required level of system performance described as a non-functional requirement for system architecture.
 Performance engineers' typical activities are setting up observation and monitoring system components, profiling system components against specific or significant workloads to find bottlenecks,  hypothesizing about performance issues root causes, validating theories, and fixing bottlenecks.
-Most of the time, it involves deep-dive through the system stack from application down to the hardware, so it is crucial to understand your underlying stack and what tools can be applied to each system component to fix issues effectively.
+Most of the time, it involves deep-dive through the system stack from application down to the hardware, so it is crucial to understand your **underlying stack** and what **tools** can be applied to each system component to fix issues effectively.
 
 
 ## Latency VS Response Time
 
 ![Latency vs Response time](latency_vs_response_time.png)
 
-Some of the metrics are the object of misinterpretation, and I want to use some talk time because they are essential in the article context.
-The most common is latency vs. response time.
-Latency is a connection latency, the time that the server needs to receive a data package. We are most interested in the time spent on sending, processing, and receiving data - response time. Response time is a crucial metric for this methodology.
+Some of the metrics are the object of misinterpretation, and I want to talk about it, because this is essential in the article context.
+**The most common** misinterpretation is latency vs. response time.
+
+*Latency* is a connection latency — the time that the server needs to receive a data package. We are most interested in the time spent on sending, processing, and receiving data — *response time*, because it is a crucial metric for this methodology.
 
 ## Utilization VS Saturation
 
 ![Utilization vs Saturation](utilization_vs_saturation.png)
 
 The next pair of related terms are utilization and saturation.
-Most of you know what utilization is - it is a measurement of how busy some resource was.
-Saturation is an important metric - it is a measurement of work queued, i.e., can not be processed right now, and awaits resource.
-For example - your CPU has more work than it can process simultaneously, so it queue work to process later. So CPU became saturated.
-Good sidenote - if none of your resources are saturated, probably your performance is acceptable.
+
+*Utilization* — a measurement of how busy some resource was.
+
+*Saturation* — a measurement of work queued, i.e., can not be processed right now, and awaits resource.
+
+For example — your CPU has more work than it can process simultaneously, so it queue work to process later. So CPU became saturated.
+
+> Good sidenote: if none of your resources are saturated, probably your performance is acceptable.
 
 # Performance is tough topic
 
 ## Subjectivity
 
-The first and foremost problem is the topic of subjectivity. How do we know if we even have a problem? For example, if I believe our web service has to respond in 100ms or less for 99percentile of requests to ensure good performance. And my colleague believes that we have to react in 200ms or less. Who is right and why? Setting up performance goals is challenging and not intuitive.
+The first and foremost problem is the topic of subjectivity. How do we know if we even have a problem?
+
+For example, if I believe our web service has to respond in 100ms or less for 99th percentile of requests to ensure good performance. And my colleague believes that we have to react in 200ms or less. Who is right and why?
+
+Setting up performance goals is challenging and not intuitive.
+
 The second problem is caused by first - do we know where to stop? If we optimized bottleneck and reduced response time by 20%, is it enough to stop, or should we continue our work?
 
 ## Investigation
 
-Investigating issues is challenging because it is often unclear where we must begin searching for the problem? Usually, we only know that we may have a problem somewhere in our system, but nothing specifically.
+Investigating issues is challenging, because it is often unclear where we must begin searching for the problem.
+Usually, we only know that we may have a problem somewhere in our system, but nothing specifically.
 It is hard to understand what components and metrics we can ignore during the investigation and where we should look first and spend more of our time.
 But this is crucial for estimating time before the fix and spending our time most effectively.
 
 ## Mental Complexity
 
+![Biases](bias.png)
 
-The most critical complexity issues are cognitive biases:
+The most critical complexity issues are cognitive biases.
+
 Cognitive biases are often a result of our brain attempting to simplify information processing. Cognitive bias tends to think a certain way, often deviating from rational and logical decision-making.
 We are consistently getting bombarded with information. Biases help us unclutter the data and reach decisions with relative speed. However, biases can subtly creep in and influence our choices.
 As human beings, we like to think we are rational - but in reality, we are prone to biases that cause us to think and act irrationally. To some extent, every one of us will have exhibited a bias blind spot in our lifetime.
 Also, we are less likely to detect bias in ourselves than others.
 
-Researchers from Carnegie Mellon University, the City University London, Boston University, and the University of Colorado studied this hypothesis.
-According to the Cognitive Bias Codex, around 180 cognitive biases (lists keep growing) can impact our rational thinking.
-Wow, 180. That's a lot to handle. Performance engineer has to be objective, and our goal is to avoid biases at any cost.
+Researchers from Carnegie Mellon University, the City University London, Boston University, and the University of Colorado [studied this hypothesis](https://pubsonline.informs.org/doi/pdf/10.1287/mnsc.2014.2096).
+Based on this study Buster Benson developed Cognitive Bias Codex[^fn-1] with more than 200 cognitive biases (lists keep growing) can impact our rational thinking.
+Wow, 200+ biases. That's a lot to handle.
 
-The second factor is cognitive complexity itself. As Miller Law states, the number of objects an average human can hold in short-term memory is 7 ± 2. We often have to operate in very complex environments and analyze thousands of metrics at hundreds of components at multiple machines in geographically separated data centers; during performance analysis, as Miller Law states, we should understand how to tackle this complexity and not burn our minds.
+Performance engineer has to be objective, and our goal is to avoid biases at any cost.
 
-And sometimes, we can even have multiple issues arise in our system simultaneously, or we can have one problem induced by various causes.
+The next factor is cognitive complexity itself. As *Miller Law states*[^fn-2], the number of objects an average human can hold in short-term memory is 7 ± 2. We often have to operate in very complex environments and analyze thousands of metrics at hundreds of components at multiple machines in geographically separated data centers; during performance analysis, as Miller Law states, we should understand how to tackle this complexity and not burn our minds.
+
+Finally, sometimes we can even have multiple issues arise in our system simultaneously, or we can have one problem induced by various causes.
 
 
 # Antipatterns
@@ -95,41 +111,41 @@ This section is about mistakes people make when they try to resolve performance 
 
 ## Early Blaming
 
-Early blaming is a trendy pattern of action. When something terrible happens, people tend to move responsibility to others without confirming it, avoid solving a problem itself, or because they do not believe they can have a problem.
+Early blaming is a trendy pattern of action. When something terrible happens, people tend to move responsibility to others without confirming it, because they avoid solving a problem itself, or do not believe they can have a problem.
 
 People often blame other services, such as third parties or a neighboring team whose service interacts with ours, responsible for performance drop because historical data shows this trend. For example, if this adjacent team dropped the whole system's performance last month, on the following incident, everybody will think that they again did something wrong.
 
 Another example is blaming system components that are often underperforming, such as Databases, Messaging systems, or JVM. In my practice blaming the Database is the most common pattern. People think that all their problems come from slow MySQL or OracleDB without verifying this hypothesis.
-
 The same goes for frameworks or libraries. Most of the time in the Java world, it is about Spring or Hibernate.
 
 Remember, early blaming leads you to biased, subjective, and ineffective investigation in a falsely narrowed scope.
 
 ## Streelight search
 
-The streetlight effect, or the drunkard's search principle, is an observational bias that occurs when people only search for something that is easiest to look at. Both names refer to a well-known joke:
-A policeman sees a drunk man searching for something under a streetlight and asks what the drunk has lost. He says he lost his keys, and they both look under the streetlight together. After a few minutes, the policeman asks if he is sure he lost them here, and the drunk replies, no, and that he failed them in the park. The policeman asks why he is searching here, and the drunk answers, "this is where the light is."
+The streetlight effect, or the drunkard's search principle, is an observational bias that occurs when people only search for something that is easiest to look at. Both names refer to a well-known joke.
+
+> A policeman sees a drunk man searching for something under a streetlight and asks what the drunk has lost. He says he lost his keys, and they both look under the streetlight together. After a few minutes, the policeman asks if he is sure he lost them here, and the drunk replies, no, and that he failed them in the park. The policeman asks why he is searching here, and the drunk answers, "this is where the light is."
 
 Applying this anti-method or antipattern to our topic means that people only use tools and utilities they know and look only at system components and metrics they know.
-People fix only problems they know how to fix.
-
-There is an obvious drawback to this strategy - imagine how easy it is to miss a lot of performance issues, probably the ones that contribute to performance degradation at most.
+**People fix only problems they know how to fix.**
+There is an obvious drawback to this strategy — imagine how easy it is to miss a lot of performance issues, probably the ones that contribute to performance degradation at most.
 
 Remember, performance engineer has to be aware of all system components and as many types of performance issues as possible. But more important is that you should memorize that there always will be things that you don't know, and you should look for them.
 
 ## Folklore Tuning
 
-Folklore tuning is my favorite antipattern, and I assume it is the most common one. Have you ever heard how your colleague said to you: "Hey, recently I saw a conference talk of Aleksei Shipilev, where he showed some great configurations for JVM, let's tune them on our project!". This was the case at all companies I have worked for. People always look on the internet for answers, where people with an unknown level of expertise and interest share their thought and write guides(not Alexei, he is excellent, and I recommend browsing through his blog, but as always - critically). And most of the time, it does not end well for your project.
+Folklore tuning is my favorite antipattern, and I assume it is the most common one.
 
-Please remember - each system has a unique tech stack, business processes, workloads, team members, and goals.
+Have you ever heard how your colleague said to you: "Hey, recently I saw a conference talk of Aleksey Shipilëv[^fn-3], where he showed some great configurations for JVM, let's tune them on our project!"? This was the case at all companies I have worked for. People always look on the internet for answers, where people with an unknown level of expertise and interest share their thought and write guides. And most of the time, it does not end well for your project.
+
+Please, remember — each system has a unique tech stack, business processes, workloads, team members, and goals.
 Magic configs from stack overflow may not help you improve your performance but can degrade or even cripple your production in runtime. I've been there, consequences of applying this pattern can be disastrous.
 
 # Methodology
 
 Okay, so we discussed what performance is, why it is complex, what you should definitely omit when trying to improve performance, and now it is time I present you a concise way of thinking, a working reasoning model, and a set of guidelines that helped me survive through multiple performance disasters.
 
-So in this chapter, I will try to answer the question - How to approach resolving performance issues?
-
+So in this chapter, I will try to answer the question: "How to approach resolving performance issues?".
 But once again, I encourage you to analyze everything I tell you and challenge all these without blind acknowledgment!
 
 ## Key Questions
@@ -137,17 +153,17 @@ But once again, I encourage you to analyze everything I tell you and challenge a
 I present vital steps that you have to complete to fix the performance issue. They are general and project or tech agnostic.
 1. Do we have a problem? Indeed, it is crucial to understand and clarify with the help of non-functional requirements to your project if a newly arrived issue is a problem that has to be solved.
 2. If we conclude that we indeed have a problem that one should resolve, we should set up a Definition of Done or acceptance criteria. That would be our stop point, after which we should not spend our time on this task.
-3. So we set up our acceptance criteria, and now we have to locate causes. Issues location is one of the obscurest places in methodology, and we will spend most of our talk time on that question.
-4. Finally, when we located all root causes, we had to prioritize the issue, estimate possible revenue from resolving it, and prepare for fixing it. Fixing itself can vary dramatically from problem to problem. Therefore I omit this point in the talk.
+3. So we set up our acceptance criteria, and now we have to locate causes. Issues location is one of the obscurest places in methodology, and we will look at its specifics.
+4. Finally, when we located all root causes, we had to prioritize the issue, estimate possible revenue from resolving it, and prepare for fixing it. Fixing itself can vary dramatically from problem to problem. Therefore I omit this point in the article.
 
 Now let's handle each question separately and in detail.
 
 ## Problem Statement
 
-Most of the time, you will know about performance issues from a third party, like support. When they come to you asking what is happening with your system, you should know what to ask them to filter only requests that matter to save some time to drink beer with your teammates.
+Most of the time, you will know about performance issues from a third party, like support. When they come to you asking what is happening with your system, you should know what information you need, in order to filter only requests that matter to save some time to drink beer with your teammates.
 
 So our questions are:
-1. hy do you think we have a performance issue? This question filters requests that may not be performance-related and provide you information about the visible effects of the problem, i.e., how users perceive this issue.
+1. Why do you think we have a performance issue? This question filters requests that may not be performance-related and provide you information about the visible effects of the problem, i.e., how users perceive this issue.
 2. Recent changes in software, hardware, or applied load? This question can immediately lead you to the reason for performance degradation. Also, it can help you with a short-term fix plan - revert recent changes.
 3. Can the issuer express the problem in terms of metrics? If a person who reports performance issues can not refer to any metrics and say performance degradation in words of RPS, latency, FPS, or any other metric, that may mean you have no issues at all or that your observation mechanisms need additional work. Otherwise, you will have concrete advice to acceptance criteria - for example, return latency and RPS to the previous level.
 4. How critical is this problem? Production is down, users are complaining, etc. Answer to this question will help to prioritize your work. If your system is down, it is probably your #1 task in the backlog now. Or if some statistics service that no one cares about is underperforming, you may not even need to spend time on it. There is always something that can bring more value.
@@ -372,3 +388,6 @@ Performance engineering can bring a lot of fun, but the hard truth is that you s
 
 Use a systematic or even scientific approach - plan your activities, research unknowns, and transform them into unknowns. Document your findings, document your systems, and make your reasoning and actions clear and understandable for all - engineer a sustainable world. Follow the darkness and encourage knowledge expansion.
 
+[^fn-1]: Buster Benson [cognitive biases list](https://busterbenson.com/piles/cognitive-biases/) on his personal web-site.
+[^fn-2]: George A. Miller (1956) Harvard University — [The Magical Number Seven, Plus or Minus Two: Some Limits on our Capacity for Processing Information](http://psychclassics.yorku.ca/Miller/)
+[^fn-3]: Aleksey Shipilëv — Java performance engineer. Has a great [technical blog](https://shipilev.net/)
