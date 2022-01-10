@@ -374,6 +374,7 @@ This is it, and you earned your coffee. Together we resolved the performance iss
 # Conclusions
 
 I have mentioned a lot of technical topics, but we have not concentrated our attention on them because this talk is not about technologies themselves. It is about growing an engineer in yourself. It is about developing structural and rational thinking. It is about abandoning your emotions and keeping your head cold. It is about bringing value to everything you do. It is about mindset. It is about how you perceive the world around you and yourself in this world.
+
 First of all, if you are an engineer, you have to develop business-oriented thinking. By saying this, I mean constantly reviewing your actions and asking yourself. My current activity helps grow the project or the company I work for? If the answer is no, you should abandon this activity and find something useful to do.
 The getting Things Done principle is fantastic, but it means nothing if you do dumb tasks that do not help your business. That is business thinking I encourage you to cultivate in yourself.
 
