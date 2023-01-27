@@ -11,11 +11,8 @@ baseurl: ''
 # Go to folder '_data/locales' to check the available language options
 lang: en
 
-# Additional parameters for datetime localization, optional. › https://github.com/iamkun/dayjs/tree/dev/src/locale
-prefer_datetime_locale: en-gb
-
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Europe/Kiev
+timezone: Europe/Warsaw
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
@@ -40,7 +37,7 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Roman Kvasnytskyi
-  email: roman.kvasnytskyi@protonmail.com             # change to your email address
+  email: roman@kvasnytskyi.net            # change to your email address
   links:
     # The first element serves as the copyright owner's link
     #- https://twitter.com/username      # change to your twitter homepage
@@ -166,6 +163,7 @@ exclude:
   - tools
   - docs
   - README.md
+  - CHANGELOG.md
   - LICENSE
   - gulpfile.js
   - node_modules
