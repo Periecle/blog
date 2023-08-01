@@ -8,7 +8,9 @@ img_path: /posts/08-01-2022-Resolving-Performance-Issues-In-Practice/
 mermaid: true
 ---
 
-This article is a recap of [my presentation at Devoxx Ukraine 2021](https://www.youtube.com/watch?v=pPu1w4Zlhoc) about resolving performance issues.
+This article is a recap of my presentation at Devoxx Ukraine 2021  about resolving performance issues.
+
+{% include youtubePlayer.html id="pPu1w4Zlhoc" %}
 
 # Agenda
 
