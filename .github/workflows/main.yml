@@ -45,3 +45,4 @@ jobs:
       -
         name: "Deploy with rsync"
         run: "rsync -avz --checksum -e \"ssh -p ${{ secrets.SSH_PORT }}\" ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kvasnytskyi.net/"
+
