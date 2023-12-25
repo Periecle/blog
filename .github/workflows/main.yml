@@ -4,19 +4,24 @@ on:
     branches:
       - main
       - master
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       -
         name: "Checkout source code"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0  # for posts's lastmod
           submodules: true
       -
         name: "Cache dependencies"
-        uses: actions/cache@v2
+        uses: actions/cache@v3.3.2
         with:
           key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}"
           path: vendor/bundle
@@ -26,7 +31,7 @@ jobs:
         uses: jerryjvl/jekyll-build-action@v1
       -
         name: "Install SSH Key"
-        uses: shimataro/ssh-key-action@v2
+        uses: shimataro/ssh-key-action@v2.6.1
         with:
           key: "${{ secrets.SSH_PRIVATE_KEY }}"
           known_hosts: just-a-placeholder-so-we-dont-get-errors
