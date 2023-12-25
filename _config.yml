@@ -141,6 +141,10 @@ defaults:
     values:
       swcache: true
 
+assets:
+  self_host:
+    enabled: true
+
 sass:
   style: compressed
 
