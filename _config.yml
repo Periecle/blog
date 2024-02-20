@@ -49,7 +49,8 @@ social:
 google_site_verification: google_meta_tag_verification # change to your verification string
 
 # ↑ --------------------------
-
+goatcounter:
+  id: "reodont" # fill in your Goatcounter ID
 
 google_analytics:
   id: "G-CYN8CTMK62"              # fill in your Google Analytics ID
@@ -87,8 +88,16 @@ comments:
     repo: Periecle/blog
     issue_term: title
 
+
 pwa:
-  enabled: true   # the option for PWA feature
+  enabled: true # the option for PWA feature (installable)
+  cache:
+    enabled: true # the option for PWA offline cache
+    # Paths defined here will be excluded from the PWA cache.
+    # Usually its value is the `baseurl` of another website that
+    # shares the same domain name as the current website.
+    deny_paths:
+    # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
 paginate: 10
 
@@ -132,10 +141,6 @@ defaults:
     values:
       layout: page
       permalink: /:title/
-  - scope:
-      path: assets/img/favicons
-    values:
-      swcache: true
   - scope:
       path: assets/js/dist
     values:
