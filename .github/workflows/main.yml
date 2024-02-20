@@ -17,14 +17,14 @@ jobs:
           submodules: true
       -
         name: "Cache dependencies"
-        uses: actions/cache@v3.3.2
+        uses: actions/cache@v4.0.0
         with:
           key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}"
           path: vendor/bundle
           restore-keys: "${{ runner.os }}-gems-\n"
       -
         name: "Setup Ruby"
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.170.0
         with:
           ruby-version: 3.2
           bundler-cache: true
@@ -35,7 +35,7 @@ jobs:
           JEKYLL_ENV: "production"
       -
         name: "Install SSH Key"
-        uses: shimataro/ssh-key-action@v2.6.1
+        uses: shimataro/ssh-key-action@v2.7.0
         with:
           key: "${{ secrets.SSH_PRIVATE_KEY }}"
           known_hosts: just-a-placeholder-so-we-dont-get-errors
@@ -45,4 +45,3 @@ jobs:
       -
         name: "Deploy with rsync"
         run: "rsync -avz --checksum -e \"ssh -p ${{ secrets.SSH_PORT }}\" ./_site/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/kvasnytskyi.net/"
-
