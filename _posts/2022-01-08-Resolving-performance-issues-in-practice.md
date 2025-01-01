@@ -4,7 +4,7 @@ date: 2022-01-08 23:00:00 +0200
 categories: [Software, Performance]
 tags: [performance, methodology, tutorial]
 
-media_subpath: '/posts/20180809'
+media_subpath: '/posts/08-01-2022-Resolving-Performance-Issues-In-Practice'
 mermaid: true
 ---
 
