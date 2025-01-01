@@ -5,7 +5,7 @@ theme: jekyll-theme-chirpy
 
 # Only if your site type is GitHub Project sites and doesn't have a custom domain,
 # change below value to '/projectname'.
-baseurl: ""
+baseurl: "blog"
 
 # The language of the site layout › http://www.lingoes.net/en/translator/langcode.htm
 # Go to folder '_data/locales' to check the available language options
@@ -19,7 +19,7 @@ timezone: Europe/Warsaw
 
 title: Roman Kvasnytskyi                        # the main title
 
-tagline: Multi-discipline tech blog   # it will display as the sub-title
+tagline: Multi-discipline tech blog   # it will display as the subtitle
 
 description: >-                        # used by seo meta and the atom feed
   Programming, algorithms, security and performance
@@ -28,10 +28,10 @@ description: >-                        # used by seo meta and the atom feed
 url: "https://kvasnytskyi.net"
 
 github:
-  username: Periecle             # change to your github username
+  username: Periecle             # change to your GitHub username
 
 twitter:
-  username: reodont            # change to your twitter username
+  username: reodont            # change to your Twitter username
 
 social:
   # Change to your full name.
@@ -40,20 +40,37 @@ social:
   email: roman@kvasnytskyi.net            # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    #- https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/periecle       # change to your github homepage
+    #- https://twitter.com/username      # change to your GitHub homepage
+    - https://github.com/periecle       # change to your Twitter homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     - https://www.linkedin.com/in/reodont
 
-google_site_verification: google_meta_tag_verification # change to your verification string
+webmaster_verifications:
+  google: # fill in your Google verification code
+  bing: # fill in your Bing verification code
+  alexa: # fill in your Alexa verification code
+  yandex: # fill in your Yandex verification code
+  baidu: # fill in your Baidu verification code
+  facebook: # fill in your Facebook verification code
 
-# ↑ --------------------------
-goatcounter:
-  id: "reodont" # fill in your Goatcounter ID
 
-google_analytics:
-  id: "G-CYN8CTMK62"              # fill in your Google Analytics ID
+# Web Analytics Settings
+analytics:
+  google:
+    id: "G-CYN8CTMK62"
+  goatcounter:
+    id: "reodont"
+  umami:
+    id: # fill in your Umami ID
+    domain: # fill in your Umami domain
+  matomo:
+    id: # fill in your Matomo ID
+    domain: # fill in your Matomo domain
+  cloudflare:
+    id: # fill in your Cloudflare Web Analytics token
+  fathom:
+    id: # fill in your Fathom Site ID
 
 # Prefer color scheme setting.
 #
@@ -73,7 +90,7 @@ theme_mode:   # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: "https://cdn.jsdelivr.net/gh/Periecle/blog-images@master"
+cdn: "https://cdn.jsdelivr.net/gh/Periecle/blog-images@master"
 
 # the avatar on sidebar, support local or CORS resources
 avatar: https://cdn.jsdelivr.net/gh/Periecle/blog-images@master/common/avatar.png
@@ -82,7 +99,7 @@ avatar: https://cdn.jsdelivr.net/gh/Periecle/blog-images@master/common/avatar.pn
 toc: true
 
 comments:
-  active: utterances         # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  provider: utterances         # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
   utterances:
     repo: Periecle/blog
@@ -104,6 +121,7 @@ paginate: 10
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
   syntax_highlighter_opts:   # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
@@ -141,10 +159,6 @@ defaults:
     values:
       layout: page
       permalink: /:title/
-  - scope:
-      path: assets/js/dist
-    values:
-      swcache: true
 
 assets:
   self_host:
@@ -169,9 +183,9 @@ exclude:
   - docs
   - README.md
   - LICENSE
+  - purgecss.js
   - rollup.config.js
-  - node_modules
-  - "*.json"
+  - "package*.json"
 
 jekyll-archives:
   enabled: [categories, tags]
