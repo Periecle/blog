@@ -368,5 +368,5 @@ Using your time wisely is essential as it's your most valuable asset. You may ha
 Use a systematic or scientific approach  -  plan your activities, research unknowns, and transform them into knowns. Document your findings and systems, and make your reasoning and actions clear and understandable for all  -  engineer a sustainable world. Follow the darkness and encourage knowledge expansion.
 
 [^fn-1]: Buster Benson [cognitive biases list](https://busterbenson.com/piles/cognitive-biases/) on his personal web-site.
-[^fn-2]: George A. Miller (1956) Harvard University — [The Magical Number Seven, Plus or Minus Two: Some Limits on our Capacity for Processing Information](http://psychclassics.yorku.ca/Miller/)
+[^fn-2]: George A. Miller (1956) Harvard University — [The Magical Number Seven, Plus or Minus Two: Some Limits on our Capacity for Processing Information](https://psychclassics.yorku.ca/Miller/)
 [^fn-3]: Aleksey Shipilëv — Java performance engineer. Has a great [technical blog](https://shipilev.net/)
