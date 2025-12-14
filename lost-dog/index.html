@@ -1,0 +1,316 @@
+---
+layout: null
+permalink: /lost-dog/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Dog - Please Help!</title>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2ed573;
+            --text-color: #2f3542;
+            --bg-color: #f1f2f6;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f1f2f6;
+            padding: 5px;
+            border-radius: 20px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #a4b0be;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background-color: #ffffff;
+            color: var(--text-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .alert-header {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .dog-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            /* Placeholder background if image is missing */
+            background-color: #dfe4ea; 
+            min-height: 250px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: #2f3542;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: #57606f;
+        }
+
+        .contact-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-call {
+            background-color: var(--secondary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);
+        }
+
+        .btn-call-alt {
+            background-color: #1e90ff;
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+        }
+
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .diet-warning {
+            background-color: #fff0f0;
+            border: 2px solid #ff4757;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #2f3542;
+        }
+        .diet-warning strong {
+            color: #ff4757;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        .diet-warning ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .diet-warning li {
+            margin-bottom: 4px;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #a4b0be;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('pl')">PL</button>
+        </div>
+
+        <div class="alert-header" data-i18n="alert_header">⚠️ I Am Lost ⚠️</div>
+        
+        <!-- REPLACE 'assets/img/dog.jpg' WITH THE ACTUAL PATH TO YOUR DOG'S PHOTO -->
+        <img src="/assets/img/dog.jpg" alt="Photo of Walter" class="dog-photo" onerror="this.style.display='none'">
+
+        <h1 data-i18n="greeting">Hi, I'm Walter 🐾</h1>
+
+        <p data-i18n="description">
+            I am a <strong>Maltipoo</strong> (born Jan 3, 2023) and I seem to have lost my way.<br>My family is looking for me. Please contact them to let them know I'm safe!
+        </p>
+
+        <div style="background-color: #e3f9e5; border: 2px solid #2ed573; border-radius: 12px; padding: 12px; margin-bottom: 20px; text-align: left;">
+            <div style="display: flex; align-items: center; margin-bottom: 5px; color: #2f3542; font-weight: 600;">
+                <span style="font-size: 1.2rem; margin-right: 8px;">🆔</span> 
+                <span data-i18n="microchip_title">I have a Microchip</span>
+            </div>
+            <div style="color: #57606f; font-size: 0.9rem; margin-left: 32px; margin-bottom: 8px;" data-i18n="microchip_desc">
+                Any vet can scan me to find my owners.
+            </div>
+            <div style="display: flex; align-items: center; color: #2f3542; font-weight: 600;">
+                <span style="font-size: 1.2rem; margin-right: 8px;">💉</span> 
+                <span data-i18n="vaccinated">Fully Vaccinated</span>
+            </div>
+        </div>
+
+        <div class="diet-warning">
+            <strong data-i18n="allergy_title">⚠️ Food Allergies</strong>
+            <span data-i18n="allergy_desc">I have sensitive digestion. To avoid allergic reactions, <b>my preferred food is:</b></span>
+            <ul>
+                <li data-i18n="food_potato">Potato 🥔</li>
+                <li data-i18n="food_eggs">Eggs 🥚</li>
+                <li data-i18n="food_meat">Horse-meat 🥩</li>
+            </ul>
+            <br>
+            <small><i data-i18n="allergy_note">(If you don't have these, I can eat other food, but please try to stick to this list if possible!)</i></small>
+        </div>
+
+        <div class="contact-group">
+            <a href="tel:+48571472490" class="btn btn-call">
+                <span class="btn-icon">📞</span> <span data-i18n="call_roman">Call Roman</span>
+            </a>
+
+            <a href="tel:+48572012858" class="btn btn-call-alt">
+                <span class="btn-icon">📞</span> <span data-i18n="call_lili">Call Lili</span>
+            </a>
+
+            <a href="mailto:roman@kvasnytskyi.net,lozheshnyklili@gmail.com" class="btn" style="background-color: #57606f; color: white; box-shadow: 0 4px 15px rgba(87, 96, 111, 0.4);">
+                <span class="btn-icon">✉️</span> <span data-i18n="email_both">Email Both Owners</span>
+            </a>
+        </div>
+
+        <div style="margin-top: 25px; font-size: 0.9rem; color: #57606f; text-align: left; background: #f1f2f6; padding: 15px; border-radius: 10px;">
+            <p style="margin: 0 0 10px 0;"><strong data-i18n="manual_contact">Manual Contact Info:</strong></p>
+            <p style="margin: 5px 0;"><strong>Roman:</strong> +48 571 472 490</p>
+            <p style="margin: 5px 0;"><strong>Lili:</strong> +48 572 012 858</p>
+            <p style="margin: 5px 0;">roman@kvasnytskyi.net</p>
+            <p style="margin: 5px 0;">lozheshnyklili@gmail.com</p>
+        </div>
+
+        <div class="footer" data-i18n="footer_thanks">
+            Thank you for helping me! ❤️
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                alert_header: "⚠️ I Am Lost ⚠️",
+                greeting: "Hi, I'm Walter 🐾",
+                description: "I am a <strong>Maltipoo</strong> (born Jan 3, 2023) and I seem to have lost my way.<br>My family is looking for me. Please contact them to let them know I'm safe!",
+                microchip_title: "I have a Microchip",
+                microchip_desc: "Any vet can scan me to find my owners.",
+                vaccinated: "Fully Vaccinated",
+                allergy_title: "⚠️ Food Allergies",
+                allergy_desc: "I have sensitive digestion. To avoid allergic reactions, <b>my preferred food is:</b>",
+                food_potato: "Potato 🥔",
+                food_eggs: "Eggs 🥚",
+                food_meat: "Horse-meat 🥩",
+                allergy_note: "(If you don't have these, I can eat other food, but please try to stick to this list if possible!)",
+                call_roman: "Call Roman",
+                call_lili: "Call Lili",
+                email_both: "Email Both Owners",
+                manual_contact: "Manual Contact Info:",
+                footer_thanks: "Thank you for helping me! ❤️"
+            },
+            pl: {
+                alert_header: "⚠️ Zgubiłem się ⚠️",
+                greeting: "Cześć, jestem Walter 🐾",
+                description: "Jestem <strong>Maltipoo</strong> (urodzony 3.01.2023) i chyba się zgubiłem.<br>Moja rodzina mnie szuka. Proszę, daj im znać, że jestem bezpieczny!",
+                microchip_title: "Mam Czip",
+                microchip_desc: "Każdy weterynarz może mnie zeskanować, aby znaleźć moich właścicieli.",
+                vaccinated: "W pełni zaszczepiony",
+                allergy_title: "⚠️ Alergie pokarmowe",
+                allergy_desc: "Mam wrażliwy żołądek. Aby uniknąć alergii, <b>moim preferowanym jedzeniem są:</b>",
+                food_potato: "Ziemniaki 🥔",
+                food_eggs: "Jajka 🥚",
+                food_meat: "Konina 🥩",
+                allergy_note: "(Jeśli ich nie masz, mogę zjeść coś innego, ale proszę, trzymaj się tej listy, jeśli to możliwe!)",
+                call_roman: "Zadzwoń do Romana",
+                call_lili: "Zadzwoń do Lili",
+                email_both: "Napisz do właścicieli",
+                manual_contact: "Dane kontaktowe:",
+                footer_thanks: "Dziękuję za pomoc! ❤️"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`).classList.add('active');
+        }
+
+        // Auto-detect language
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith('pl')) {
+            setLanguage('pl');
+        } else {
+            setLanguage('en');
+        }
+    </script>
+
+</body>
+</html>
